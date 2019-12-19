@@ -1,0 +1,34 @@
+= sample
+:TOC:
+
+== 準備
+
+----
+$ cd $PROJECT_ROOT
+$ nodenv local
+12.14.0
+$ npm install -g ts-node # ローカルに置くほうがいいと思うが？
+$ cd db
+$ docker-compose up -d
+Recreating db_db_1    ... done # DB
+Starting db_adminer_1 ... done # DBいじれる画面 http://localhost:8080
+$ psqlとか上の画面で hoge スキーマ作る
+$ cd ..
+$ yarn install
+$ npm run migration:run. # テーブルつくる
+$ yarn start
+$ curl -X POST -H 'Content-Type:application/json' -d '{"email": "user@user.com", "displayName": "New user", "username": "user"}' localhost:3001/users;
+{"email":"user@user.com","displayName":"New user","username":"user","id":1} # ユーザ登録
+$ cd admin-ui/
+$ yarn install
+$ yarn start
+----
+
+== 参考
+
+* link:https://medium.com/fusionworks/creating-admin-like-web-applications-with-nestjs-and-react-admin-part-1-9aab84d970df
+
+== メモ
+
+* railsみたいにコマンド一発でCURDな画面ができるわけじゃないけど、結構楽かもしれん。
+* nest.jsの流行り具合が気になる。
